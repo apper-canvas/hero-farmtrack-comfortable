@@ -1,12 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/layouts/Root";
 import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
 import NavItem from "@/components/molecules/NavItem";
 import { cn } from "@/utils/cn";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { logout } = useAuth();
 
   const navigation = [
     { name: "Dashboard", to: "", icon: "LayoutDashboard" },
@@ -44,8 +47,18 @@ const Header = () => {
                   label={item.name}
                   className="px-4 py-2"
                 />
-              ))}
+))}
             </nav>
+            
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={logout}
+              className="ml-4"
+            >
+              <ApperIcon name="LogOut" className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
 
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -97,7 +110,17 @@ const Header = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                   />
                 ))}
-              </nav>
+</nav>
+              
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={logout}
+                className="mt-4 w-full"
+              >
+                <ApperIcon name="LogOut" className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
             </div>
           </div>
         </div>
